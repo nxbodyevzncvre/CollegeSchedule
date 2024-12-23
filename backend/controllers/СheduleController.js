@@ -3,6 +3,15 @@ const db = require('../db/db')
 
 class ScheduleController {
     async getScedule(req, res) {
+        const {group} = req.body;
+
+        const schedule = await db.query(`SELECT * FROM "${group}"`);
+
+        res.status(200).json({schedule: schedule.rows[0]})
+    }
+
+    async getFile(req, res) {
+        const files = req.files;
         try {
             const workbook = xlsx.readFile("uploads/2.xlsx");
             const allSchedules = [];
@@ -87,7 +96,6 @@ class ScheduleController {
                 const groupName = schedule.group.replace(/\s+/g, "_"); 
                 const createTableQuery = `
                     CREATE TABLE IF NOT EXISTS "${groupName}" (
-                        id SERIAL PRIMARY KEY,
                         "1 пара" TEXT,
                         "2 пара" TEXT,
                         "3 пара" TEXT,
@@ -164,7 +172,6 @@ class ScheduleController {
                 const groupName = schedule.group.replace(/\s+/g, "_"); 
                 const createTableQuery = `
                     CREATE TABLE IF NOT EXISTS "${groupName}" (
-                        id SERIAL PRIMARY KEY,
                         "1 пара" TEXT,
                         "2 пара" TEXT,
                         "3 пара" TEXT,
@@ -183,16 +190,6 @@ class ScheduleController {
 
             return schedule.group ? schedule : null;
         }
-    }
-    
-    async getByGroup(req, res){
-        
-    }
-
-    async getFile(req, res) {
-        const files = req.files;
-
-        console.log(files)
     }
 }
 
