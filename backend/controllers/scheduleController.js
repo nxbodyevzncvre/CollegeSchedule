@@ -150,9 +150,13 @@ class ScheduleController {
     }
 
     async getFile(req, res) {
-        const tables = req.files;
+        const filedata = req.file;
 
-        res.status(500).json({message: tables})
+        if(!filedata) {
+            res.status(500).json({message: 'Файл не загрузился'})
+        } else {
+            res.status(200).json({message: filedata})
+        }
     }
 }
 

@@ -12,10 +12,18 @@ const storageConfig = multer.diskStorage({
     }
 })
 
-const upload = multer({storage: storageConfig});
+const fileFilter = (req, file, cb) => {
+    if(file.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
+
+const upload = multer({storage: storageConfig, fileFilter: fileFilter});
 
 router.get("/schedule", ScheduleController.getScedule);
 
-router.post("/get-file", upload.array("files", 2), ScheduleController.getFile);
+router.post("/get-file", upload.single("files"), ScheduleController.getFile);
 
 module.exports = router;
