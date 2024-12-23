@@ -1,15 +1,14 @@
 import axios from "axios";
 
-export async function handleSignIn(name, password){
+export async function handleSignIn(username, password){
     try{
         const response = await axios.post("http://localhost:8080/sign-in",{
-            name,
+            username,
             password
         });
         return response
 
     }catch(err){
         throw "Неправильный логин или пароль";
-
     };
 }

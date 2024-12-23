@@ -20,8 +20,9 @@ export default function SignIn(){
                 console.log("Ошибка, введите данные")
             }
             const response = await handleSignIn(name, password);
-            if (response.data.JWT){
-                localStorage.setItem("token", response.data.JWT);
+            if (response.data.group){
+                localStorage.setItem("group", response.data.group)
+                console.log(response);
                 router.push("/")
             }
         }catch(err){
