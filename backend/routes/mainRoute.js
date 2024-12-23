@@ -1,6 +1,7 @@
 const Router = require("express");
 const router = new Router();
-const ScheduleController = require('../controllers/scheduleController');
+const ScheduleController = require('../controllers/СheduleController');
+const AuthController = require('../controllers/AuthController');
 const multer = require('multer')
 
 const storageConfig = multer.diskStorage({
@@ -23,7 +24,9 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({storage: storageConfig, fileFilter: fileFilter});
 
 router.get("/schedule", ScheduleController.getScedule);
-
+router.get("/schedule-group", ScheduleController.getByGroup);
 router.post("/get-file", upload.single("files"), ScheduleController.getFile);
+
+router.post("/sign-in", AuthController.signIn);
 
 module.exports = router;
