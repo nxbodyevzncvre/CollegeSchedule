@@ -10,6 +10,7 @@ export default function SignIn(){
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(null)
+
     
     async function handleForm(e){
         e.preventDefault();
@@ -17,12 +18,11 @@ export default function SignIn(){
 
         try{
             if (!name || !password){
-                console.log("Ошибка, введите данные")
+                setError("Введите все данные")
             }
             const response = await handleSignIn(name, password);
             if (response.data.group){
                 localStorage.setItem("group", response.data.group)
-                console.log(response);
                 router.push("/")
             }
         }catch(err){

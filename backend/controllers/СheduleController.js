@@ -4,10 +4,15 @@ const db = require('../db/db')
 class ScheduleController {
     async getScedule(req, res) {
         const {group} = req.body;
+        if (group == "admin"){
+            console.log("ADMIN TIME")
+            
+            res.status(200).json({schedule:"admin time"})
+        }else{
+            const schedule = await db.query(`SELECT * FROM "${group}"`);
 
-        const schedule = await db.query(`SELECT * FROM "${group}"`);
-
-        res.status(200).json({schedule: schedule.rows})
+            res.status(200).json({schedule: schedule.rows})
+        }
     }
 
     async getFile(req, res) {
