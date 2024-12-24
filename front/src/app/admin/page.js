@@ -26,7 +26,7 @@ export default function AdminPanel(){
 
     }
     return(
-        <form className="flex flex-col gap-4 justify-center items-center translate-y-1/2">
+        <form method="POST"  className="flex flex-col gap-4 justify-center items-center translate-y-1/2 text-black">
             <span>Upload a file</span>
             <input type="file" name="file" ref={fileInput} />
             <button type="submit" onClick={uploadFile}>

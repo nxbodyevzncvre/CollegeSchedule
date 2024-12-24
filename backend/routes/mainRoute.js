@@ -24,7 +24,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({storage: storageConfig, fileFilter: fileFilter});
 
 router.post("/schedule", ScheduleController.getScedule);
-router.post("/get-file", upload.single("files"), ScheduleController.getFile);
+router.post("/get-file", upload.single("file"), ScheduleController.getFile);
 
 router.post("/sign-in", AuthController.signIn);
 
