@@ -65,7 +65,7 @@ export default function Home() {
       <h2 className="text-3xl font-bold text-center mb-4">
         <span className="text-red-500">{group}</span>
       </h2>
-      <h1 className="text-3xl font-bold text-center mb-4">Расписание занятий</h1>
+      <h1 className="text-3xl font-bold text-center mb-4 text-black">Расписание занятий</h1>
       <div className="flex justify-center mb-6 space-x-2">
         {daysOfWeek.map((day) => (
           <button
@@ -82,7 +82,7 @@ export default function Home() {
         ))}
       </div>
 
-      <table className="min-w-full border-collapse border border-gray-300 text-left">
+      <table className="min-w-full border-collapse border border-gray-300 text-left text-black">
         <thead className="bg-gray-100">
           <tr>
             <th className="border border-gray-300 px-4 py-2 font-semibold">
@@ -93,13 +93,13 @@ export default function Home() {
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-wrap">
           {currentDaySchedule.map((lesson, index) => (
             <tr key={index}>
               <td className="border border-gray-300  bg-white text-nowrap px-4 py-4">
                 {lesson.lessonNumber}
               </td>
-              <td className="border border-gray-300 text-nowrap bg-white px-4 py-4">
+              <td className="border border-gray-300 bg-white px-4 py-4">
                 {lesson.details || "Отсутсвует"}
               </td>
             </tr>
