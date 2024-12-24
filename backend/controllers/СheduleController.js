@@ -7,13 +7,13 @@ class ScheduleController {
 
         const schedule = await db.query(`SELECT * FROM "${group}"`);
 
-        res.status(200).json({schedule: schedule.rows[0]})
+        res.status(200).json({schedule: schedule.rows})
     }
 
     async getFile(req, res) {
         const files = req.files;
         try {
-            const workbook = xlsx.readFile("uploads/2.xlsx");
+            const workbook = xlsx.readFile("uploads/2.xlsx"); 
             const allSchedules = [];
 
             workbook.SheetNames.forEach((sheetName) => {
@@ -96,6 +96,7 @@ class ScheduleController {
                 const groupName = schedule.group.replace(/\s+/g, "_"); 
                 const createTableQuery = `
                     CREATE TABLE IF NOT EXISTS "${groupName}" (
+                        id SERIAL PRIMARY KEY,
                         "1 пара" TEXT,
                         "2 пара" TEXT,
                         "3 пара" TEXT,
@@ -172,6 +173,7 @@ class ScheduleController {
                 const groupName = schedule.group.replace(/\s+/g, "_"); 
                 const createTableQuery = `
                     CREATE TABLE IF NOT EXISTS "${groupName}" (
+                        id SERIAL PRIMARY KEY,
                         "1 пара" TEXT,
                         "2 пара" TEXT,
                         "3 пара" TEXT,
