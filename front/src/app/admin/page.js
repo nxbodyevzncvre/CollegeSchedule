@@ -21,6 +21,7 @@ export default function AdminPanel(){
     async function uploadFile(e){
         e.preventDefault();
         setError(null)
+        setAproved(null)
         const formData = new FormData();
 
         formData.append("file", fileInput?.current?.files?.[0]);
@@ -49,8 +50,8 @@ export default function AdminPanel(){
                     Вернутся на авторизацию
                 </button>
             </div>
-            <form className="flex flex-col gap-4 justify-center items-center translate-y-1/2 ">
-                <span>Upload a file</span>
+            <form className="flex flex-col gap-4 justify-center items-center translate-y-1/2 text-black">
+                <span className="text-black">Upload a file</span>
                 <input type="file" name="file" ref={fileInput} />
                 <button type="submit" onClick={uploadFile} className="border-4 border-black p-2 rounded-md">
                     Submit
