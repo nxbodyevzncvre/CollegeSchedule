@@ -8,6 +8,7 @@ const role = localStorage.getItem("group");
 
 export default function AdminPanel(){
     const router = useRouter()
+    const [aproved, setAproved] = useState(false)
     
     useEffect(()=>{
         if (role !== "admin"){
@@ -30,6 +31,7 @@ export default function AdminPanel(){
             });
             if (response.ok){
                 setError(null)
+                setAproved(true)
             }else{
                 setError('Загрузите снова');
             }
@@ -41,13 +43,21 @@ export default function AdminPanel(){
 
     }
     return(
-        <form className="flex flex-col gap-4 justify-center items-center translate-y-1/2 text-black">
-            <span>Upload a file</span>
-            <input type="file" name="file" ref={fileInput} />
-            <button type="submit" onClick={uploadFile} className="border-4 border-black p-2 rounded-md">
-                Submit
-            </button>
-            {error && <p className="text-red-400 underline">Загрузите файл снова</p>}
-        </form>
+        <div>
+            <div className="flex justify-end my-4 mx-10">
+                <button className="bg-black text-white p-3 rounded-lg hover:bg-black/70 transition delay-75 font-bold" onClick={(e)=>{router.push("/sign-in")}}>
+                    Вернутся на авторизацию
+                </button>
+            </div>
+            <form className="flex flex-col gap-4 justify-center items-center translate-y-1/2 ">
+                <span>Upload a file</span>
+                <input type="file" name="file" ref={fileInput} />
+                <button type="submit" onClick={uploadFile} className="border-4 border-black p-2 rounded-md">
+                    Submit
+                </button>
+                {error && <p className="text-red-400 underline">Загрузите файл снова</p>}
+                {aproved && <p className="text-green-500 underline">Успех!</p>}
+            </form>
+        </div>
     )
 }
