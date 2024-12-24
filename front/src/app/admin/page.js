@@ -18,12 +18,6 @@ export default function AdminPanel(){
         });
         const result = await response.json();
         console.log(result);
-
-
-
-
-       
-
     }
     return(
         <form method="POST"  className="flex flex-col gap-4 justify-center items-center translate-y-1/2 text-black">
